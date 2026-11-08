@@ -1,0 +1,9 @@
+:root {
+  --primary: #4F46E5;
+  --primary-foreground: #FFFFFF;
+  --radius: 0.75rem;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
