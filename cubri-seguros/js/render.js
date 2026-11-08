@@ -1,14 +1,33 @@
 // js/render.js
-import { solicitud } from './estado.js';
+import { solicitud, planes } from './estado.js';
+import { calcularCuota, FACTORES } from './cotizador.js';
 
 const NOMBRES_PASOS = ['Cotizar', 'Plan', 'Datos', 'Pago'];
+
+// Formato de moneda (tip 3 del TP)
+const formatoMoneda = new Intl.NumberFormat('es-AR', {
+  style: 'currency',
+  currency: 'ARS',
+  maximumFractionDigits: 0,
+});
 
 export function render() {
   document.querySelectorAll('[data-paso]').forEach((s) => {
     s.hidden = Number(s.dataset.paso) !== solicitud.paso;
   });
   renderStepper();
+  renderPlanes();
   renderResumen();
+}
+
+// Cuota mensual de un plan según el equipo cargado.
+// Es la única forma de calcularla: tanto las cards como el resumen usan esta función.
+function cuotaDe(plan) {
+  return calcularCuota(
+    solicitud.equipo.valor,
+    plan.tasaAnual,
+    FACTORES[solicitud.equipo.antiguedad]
+  );
 }
 
 function renderStepper() {
@@ -55,8 +74,27 @@ function renderStepper() {
   });
 }
 
+// Pantalla 03: precio de cada card y plan marcado según el estado
+function renderPlanes() {
+  planes.forEach((plan) => {
+    const precio = document.querySelector(`[data-precio="${plan.id}"]`);
+    precio.textContent = formatoMoneda.format(cuotaDe(plan));
+  });
+
+  document.querySelectorAll('input[name="plan"]').forEach((radio) => {
+    radio.checked = radio.value === solicitud.plan;
+  });
+}
+
+// Resumen del footer del paso 2, generado desde el estado
 function renderResumen() {
-  // la completamos más adelante
+  const plan = planes.find((p) => p.id === solicitud.plan);
+  if (!plan) return;   // todavía no se cargaron los planes
+
+  const cuota = formatoMoneda.format(cuotaDe(plan));
+  document.querySelector('[data-resumen="detalle"]').textContent =
+    `Plan ${plan.nombre} · ${solicitud.equipo.modelo}`;
+  document.querySelector('[data-resumen="total"]').textContent = `${cuota}/mes`;
 }
 
 // Muestra el mensaje de error de un campo (o lo oculta si mensaje es null)

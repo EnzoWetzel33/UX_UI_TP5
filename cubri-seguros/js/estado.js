@@ -19,3 +19,11 @@ export function irAPaso(n) {
 export function actualizarEquipo(campo, valor) {
   solicitud.equipo[campo] = valor;
 }
+
+// Los planes se cargan desde data/planes.json (son datos fijos, no parte del formulario)
+export const planes = [];
+
+export function elegirPlan(id) {
+  solicitud.plan = id;
+  render();
+}

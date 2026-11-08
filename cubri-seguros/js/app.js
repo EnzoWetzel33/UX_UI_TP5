@@ -1,5 +1,5 @@
 // js/app.js
-import { solicitud, irAPaso, actualizarEquipo } from './estado.js';
+import { solicitud, irAPaso, actualizarEquipo, planes, elegirPlan } from './estado.js';
 import { render, mostrarError } from './render.js';
 import {
   validarMarca,
@@ -24,7 +24,6 @@ function conectarBoton(id, paso) {
 }
 
 conectarBoton('btn-empezar', 1);          // Inicio → Cotizar
-conectarBoton('btn-ver-planes', 2);       // Cotizar → Elegir plan
 conectarBoton('btn-continuar-plan', 3);   // Elegir plan → Datos
 conectarBoton('btn-continuar-pago', 4);   // Datos → Pago
 conectarBoton('btn-pagar', 5);            // Pago → Éxito (provisorio, el pago real es del hito 4)
@@ -96,6 +95,23 @@ radiosAntiguedad.forEach((radio) => {
   radio.addEventListener('blur', () => {
     mostrarError('antiguedad', validarAntiguedad(solicitud.equipo.antiguedad));
   });
+});
+
+// ---------- Paso 2: Elegir plan ----------
+
+// "Ver planes": carga planes.json (solo la primera vez) y pasa al paso 2
+btnVerPlanes.addEventListener('click', async () => {
+  if (planes.length === 0) {
+    const respuesta = await fetch('data/planes.json');
+    const lista = await respuesta.json();
+    planes.push(...lista);
+  }
+  irAPaso(2);
+});
+
+// Elegir un plan: se guarda en el estado y se vuelve a pintar
+document.querySelectorAll('input[name="plan"]').forEach((radio) => {
+  radio.addEventListener('change', () => elegirPlan(radio.value));
 });
 
 window.solicitud = solicitud;   // PROVISORIO: solo para mirar el estado en la consola
