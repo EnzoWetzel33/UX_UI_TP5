@@ -58,3 +58,24 @@ function renderStepper() {
 function renderResumen() {
   // la completamos más adelante
 }
+
+// Muestra el mensaje de error de un campo (o lo oculta si mensaje es null)
+export function mostrarError(id, mensaje) {
+  const control = document.getElementById(id);
+  const campo = control.closest('.field');
+  const error = document.getElementById(id + '-error');
+
+  if (mensaje) {
+    error.textContent = mensaje;
+    error.hidden = false;
+    control.setAttribute('aria-invalid', 'true');
+    control.setAttribute('aria-describedby', id + '-error');
+    if (campo) campo.setAttribute('data-invalid', 'true');
+  } else {
+    error.textContent = '';
+    error.hidden = true;
+    control.removeAttribute('aria-invalid');
+    control.removeAttribute('aria-describedby');
+    if (campo) campo.removeAttribute('data-invalid');
+  }
+}

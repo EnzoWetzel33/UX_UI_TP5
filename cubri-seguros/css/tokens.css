@@ -17,3 +17,7 @@ body {
 .field select {
   background-color: #FFFFFF;
 }
+
+.field [role="alert"] {
+  font-size: 12px;
+}

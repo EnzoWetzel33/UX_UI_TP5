@@ -15,3 +15,7 @@ export function irAPaso(n) {
   solicitud.paso = n;
   render();   // siempre después de cambiar el estado
 }
+
+export function actualizarEquipo(campo, valor) {
+  solicitud.equipo[campo] = valor;
+}
