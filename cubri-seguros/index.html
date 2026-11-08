@@ -79,38 +79,16 @@
   </section>
 
   <!-- Pantalla 02: Cotizar (Paso 1) -->
-  <section data-paso="1" class="mt-16 max-w-2xl mx-auto">
+  <section data-paso="1" class="max-w-2xl mx-auto">
 
     <!-- 1. Header -->
     <header class="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-5">
-      <button type="button" class="btn" data-variant="ghost" aria-label="Volver">←</button>
+      <button type="button" class="btn" data-variant="ghost" aria-label="Volver" data-accion="volver">←</button>
       <h2 class="text-[15px] font-semibold">Cotizá tu seguro</h2>
     </header>
 
     <!-- 2. Stepper (fijo por ahora: paso 1 activo) -->
-    <div class="border-b border-slate-200 bg-white px-5 py-4">
-      <ol class="flex items-center gap-1.5 text-xs font-semibold">
-        <li class="flex items-center gap-1.5 text-indigo-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-indigo-600 text-white">1</span>
-          Cotizar
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">2</span>
-          Plan
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">3</span>
-          Datos
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">4</span>
-          Pago
-        </li>
-      </ol>
-    </div>
+    <div data-stepper class="border-b border-slate-200 bg-white px-5 py-4"></div>
 
     <!-- 3. Contenido -->
     <div class="flex flex-col gap-3 p-5">
@@ -180,7 +158,7 @@
 
     <!-- 4. Footer -->
     <footer class="sticky bottom-0 flex flex-col gap-2.5 border-t border-slate-200 bg-white px-5 pt-4 pb-7">
-      <button type="button" id="btn-ver-planes" class="btn w-full lg:w-auto lg:self-end" disabled>
+      <button type="button" id="btn-ver-planes" class="btn w-full lg:w-auto lg:self-end" >
         Ver planes
       </button>
     </footer>
@@ -188,38 +166,16 @@
   </section>
 
     <!-- Pantalla 03: Elegir plan (Paso 2) -->
-  <section data-paso="2" class="mt-16 max-w-2xl mx-auto">
+  <section data-paso="2" class="max-w-2xl mx-auto">
 
     <!-- 1. Header -->
     <header class="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-5">
-      <button type="button" class="btn" data-variant="ghost" aria-label="Volver">←</button>
+      <button type="button" class="btn" data-variant="ghost" aria-label="Volver" data-accion="volver">←</button>
       <h2 class="text-[15px] font-semibold">Elegí tu plan</h2>
     </header>
 
     <!-- 2. Stepper (fijo por ahora: paso 1 completo, paso 2 activo) -->
-    <div class="border-b border-slate-200 bg-white px-5 py-4">
-      <ol class="flex items-center gap-1.5 text-xs font-semibold">
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Cotizar
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-indigo-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-indigo-600 text-white">2</span>
-          Plan
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">3</span>
-          Datos
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">4</span>
-          Pago
-        </li>
-      </ol>
-    </div>
+    <div data-stepper class="border-b border-slate-200 bg-white px-5 py-4"></div>
 
     <!-- 3. Contenido: 3 planes (mismo name="plan" = solo uno elegido) -->
     <div class="flex flex-col gap-3 p-5 lg:grid lg:grid-cols-3">
@@ -301,38 +257,16 @@
   </section>
 
     <!-- Pantalla 04: Datos personales (Paso 3) -->
-  <section data-paso="3" class="mt-16 max-w-2xl mx-auto">
+  <section data-paso="3" class="max-w-2xl mx-auto">
 
     <!-- 1. Header -->
     <header class="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-5">
-      <button type="button" class="btn" data-variant="ghost" aria-label="Volver">←</button>
+      <button type="button" class="btn" data-variant="ghost" aria-label="Volver" data-accion="volver">←</button>
       <h2 class="text-[15px] font-semibold">Tus datos</h2>
     </header>
 
     <!-- 2. Stepper (fijo por ahora: Cotizar y Plan completos, Datos activo) -->
-    <div class="border-b border-slate-200 bg-white px-5 py-4">
-      <ol class="flex items-center gap-1.5 text-xs font-semibold">
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Cotizar
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Plan
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-indigo-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-indigo-600 text-white">3</span>
-          Datos
-        </li>
-        <li class="h-px flex-1 bg-slate-200"></li>
-        <li class="flex items-center gap-1.5 text-slate-500">
-          <span class="flex size-5 items-center justify-center rounded-full border border-slate-200 bg-white">4</span>
-          Pago
-        </li>
-      </ol>
-    </div>
+    <div data-stepper class="border-b border-slate-200 bg-white px-5 py-4"></div>
 
     <!-- 3. Contenido -->
     <div class="flex flex-col gap-3 p-5">
@@ -389,7 +323,7 @@
 
     <!-- 4. Footer -->
     <footer class="sticky bottom-0 flex flex-col gap-2.5 border-t border-slate-200 bg-white px-5 pt-4 pb-7">
-      <button type="button" id="btn-continuar-pago" class="btn w-full lg:w-auto lg:self-end" disabled>
+      <button type="button" id="btn-continuar-pago" class="btn w-full lg:w-auto lg:self-end" >
         Continuar al pago
       </button>
       <p class="text-center text-xs text-slate-500">El botón se habilita cuando el formulario es válido</p>
@@ -398,38 +332,16 @@
   </section>
 
     <!-- Pantalla 05: Pago (Paso 4) -->
-  <section data-paso="4" class="mt-16 max-w-2xl mx-auto">
+  <section data-paso="4" class="max-w-2xl mx-auto">
 
     <!-- 1. Header -->
     <header class="flex h-14 items-center gap-3 border-b border-slate-200 bg-white px-5">
-      <button type="button" class="btn" data-variant="ghost" aria-label="Volver">←</button>
+      <button type="button" class="btn" data-variant="ghost" aria-label="Volver" data-accion="volver">←</button>
       <h2 class="text-[15px] font-semibold">Pago</h2>
     </header>
 
     <!-- 2. Stepper (fijo por ahora: 1, 2 y 3 completos, Pago activo) -->
-    <div class="border-b border-slate-200 bg-white px-5 py-4">
-      <ol class="flex items-center gap-1.5 text-xs font-semibold">
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Cotizar
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Plan
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-emerald-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-emerald-600 text-white">✓</span>
-          Datos
-        </li>
-        <li class="h-px flex-1 bg-emerald-600"></li>
-        <li class="flex items-center gap-1.5 text-indigo-600">
-          <span class="flex size-5 items-center justify-center rounded-full bg-indigo-600 text-white">4</span>
-          Pago
-        </li>
-      </ol>
-    </div>
+    <div data-stepper class="border-b border-slate-200 bg-white px-5 py-4"></div>
 
     <!-- 3. Contenido -->
     <div class="flex flex-col gap-3 p-5">
@@ -518,7 +430,7 @@
   </section>
 
     <!-- Pantalla 06: Éxito -->
-  <section data-paso="5" class="mt-16 max-w-2xl mx-auto bg-white">
+  <section data-paso="5" class="max-w-2xl mx-auto bg-white">
 
     <div class="flex flex-col items-center gap-3 px-5 pt-12 pb-6 text-center">
 
@@ -567,7 +479,7 @@
 
 
   <!-- Pantalla 07: Error de pago -->
-  <section data-paso="6" class="mt-16 max-w-2xl mx-auto bg-white">
+  <section data-paso="6" class="max-w-2xl mx-auto bg-white">
 
     <div class="flex flex-col items-center gap-3 px-5 pt-12 pb-6 text-center">
 
