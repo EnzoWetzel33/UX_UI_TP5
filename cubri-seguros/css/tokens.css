@@ -7,3 +7,13 @@
 body {
   font-family: 'Inter', sans-serif;
 }
+/* Ajustes para parecerse al Figma */
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input:not([type="checkbox"]),
+.field select {
+  background-color: #FFFFFF;
+}
