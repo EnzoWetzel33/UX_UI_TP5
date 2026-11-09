@@ -87,7 +87,7 @@ Pago simulado (solo tarjetas de prueba, nunca datos reales):
 
 | 01 · Inicio | 02 · Cotizar | 03 · Elegir plan | 04 · Datos |
 |---|---|---|---|
-| ![Inicio mobile](capturas/mobile-01-inicio.png) | ![Cotizar mobile](capturas/mobile-02-cotizar.png) | ![Planes mobile](capturas/mobile-03-planes.png) | ![Datos mobile](capturas/mobile-04-datos.png) |
+| ![Inicio mobile](cubri-seguros/capturas/mobile-01-inicio.png) | ![Cotizar mobile](capturas/mobile-02-cotizar.png) | ![Planes mobile](capturas/mobile-03-planes.png) | ![Datos mobile](capturas/mobile-04-datos.png) |
 
 | 05 · Pago | 06 · Éxito | 07 · Error de pago |
 |---|---|---|
