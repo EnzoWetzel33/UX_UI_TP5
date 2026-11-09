@@ -36,6 +36,7 @@ function conectarBoton(id, paso) {
 }
 
 conectarBoton('btn-empezar', 1);          // Inicio → Cotizar
+conectarBoton('btn-cotizar-hero', 1);     // Inicio (botón del hero, desktop) → Cotizar
 conectarBoton('btn-continuar-plan', 3);   // Elegir plan → Datos
 conectarBoton('btn-continuar-pago', 4);   // Datos → Pago
 conectarBoton('btn-reintentar', 4);       // Error → Pago
@@ -263,5 +264,3 @@ document.getElementById('btn-volver-inicio').addEventListener('click', () => {
 
   irAPaso(0);
 });
-
-window.solicitud = solicitud;   // PROVISORIO: solo para mirar el estado en la consola

@@ -22,6 +22,7 @@ export function irAPaso(n) {
 
 export function actualizarEquipo(campo, valor) {
   solicitud.equipo[campo] = valor;
+  render();
 }
 
 export function elegirPlan(id) {

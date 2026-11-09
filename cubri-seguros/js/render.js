@@ -18,6 +18,7 @@ export function render() {
   renderStepper();
   renderPlanes();
   renderResumen();
+  renderResumenLateral();
   renderExito();
   renderError();
 }
@@ -121,6 +122,8 @@ function renderExito() {
   document.getElementById('exito-email').textContent = solicitud.titular.email;
   document.getElementById('exito-poliza').textContent = solicitud.poliza;
   document.getElementById('exito-plan').textContent = plan.nombre;
+    document.getElementById('exito-equipo').textContent =
+    `${solicitud.equipo.marca} ${solicitud.equipo.modelo}`;
   document.getElementById('exito-vigencia').textContent = new Date().toLocaleDateString('es-AR', {
     day: '2-digit',
     month: '2-digit',
@@ -154,4 +157,59 @@ export function mostrarError(id, mensaje) {
     control.removeAttribute('aria-describedby');
     if (campo) campo.removeAttribute('data-invalid');
   }
+}
+
+// Evita que un texto escrito por la persona se interprete como HTML
+function escapar(texto) {
+  return String(texto).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
+// Una fila del resumen: etiqueta a la izquierda, valor a la derecha
+function fila(etiqueta, valor) {
+  return `
+    <div class="flex justify-between gap-4 text-xs">
+      <span class="text-slate-500">${etiqueta}</span>
+      <span class="text-right font-semibold">${escapar(valor)}</span>
+    </div>`;
+}
+
+// Card "Resumen" de desktop: se genera desde el estado, una sola vez para todos los pasos
+function renderResumenLateral() {
+  const e = solicitud.equipo;
+  const t = solicitud.titular;
+  const plan = planes.find((p) => p.id === solicitud.plan);
+  const paso = solicitud.paso;
+
+  const equipo = `${e.marca} ${e.modelo}`.trim();
+  const titular = `${t.nombre} ${t.apellido}`.trim();
+
+  let filas = fila('Seguro', 'Celular') + fila('Equipo', equipo || '—');
+  let pie = '';
+
+  if (paso === 1) {
+    filas += fila('Valor', e.valor > 0 ? formatoMoneda.format(e.valor) : '—');
+    pie = '<p class="mt-3 text-xs text-slate-500">Completá los datos del equipo para ver el precio.</p>';
+  } else if (plan) {
+    filas += fila('Plan', plan.nombre);
+    if (paso === 4) filas += fila('Titular', titular || '—');
+    if (e.antiguedad !== '') {
+      pie = `
+        <div class="mt-3 flex items-center justify-between border-t border-slate-200 pt-3">
+          <span class="text-[13px] text-slate-500">Total mensual</span>
+          <span class="text-base font-bold">${formatoMoneda.format(cuotaDe(plan))}</span>
+        </div>`;
+    }
+  }
+
+  const html = `
+    <h3 class="mb-3 text-sm font-bold">Resumen</h3>
+    <div class="grid gap-2">${filas}</div>
+    ${pie}
+    <p class="mt-4 text-xs text-slate-500">Contratación 100% online · cancelás cuando quieras</p>`;
+
+  document.querySelectorAll('[data-resumen-card]').forEach((card) => {
+    card.innerHTML = html;
+  });
 }
