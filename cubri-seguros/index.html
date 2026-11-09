@@ -281,10 +281,12 @@
           <div role="group" class="field">
             <label for="nombre">Nombre</label>
             <input id="nombre" name="nombre" type="text" placeholder="Juan">
+            <p id="nombre-error" role="alert" hidden></p>
           </div>
           <div role="group" class="field">
             <label for="apellido">Apellido</label>
             <input id="apellido" name="apellido" type="text" placeholder="Pérez">
+            <p id="apellido-error" role="alert" hidden></p>
           </div>
         </div>
 
@@ -293,25 +295,26 @@
           <div role="group" class="field">
             <label for="dni">DNI</label>
             <input id="dni" name="dni" type="text" inputmode="numeric" placeholder="30123456">
+            <p id="dni-error" role="alert" hidden></p>
           </div>
           <div role="group" class="field">
             <label for="nacimiento">Nacimiento</label>
             <input id="nacimiento" name="nacimiento" type="date">
+            <p id="nacimiento-error" role="alert" hidden></p>
           </div>
         </div>
 
-        <!-- Email (se muestra con error, como en el Figma) -->
-        <div role="group" class="field" data-invalid>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" aria-invalid="true"
-                 aria-describedby="email-error" value="juan.perez@">
-          <p id="email-error" role="alert">Ingresá un email válido</p>
+        <div role="group" class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="juan.perez@mail.com">
+            <p id="email-error" role="alert" hidden></p>
         </div>
 
         <!-- Celular -->
         <div role="group" class="field">
           <label for="celular">Celular</label>
           <input id="celular" name="celular" type="tel" placeholder="11 5555-1234">
+          <p id="celular-error" role="alert" hidden></p>
         </div>
 
         <!-- Términos -->
@@ -321,13 +324,14 @@
             Acepto los términos y condiciones y la política de privacidad.
           </label>
         </div>
+        <p id="terminos-error" role="alert" hidden class="text-xs text-red-600"></p>
 
       </form>
     </div>
 
     <!-- 4. Footer -->
     <footer class="sticky bottom-0 flex flex-col gap-2.5 border-t border-slate-200 bg-white px-5 pt-4 pb-7">
-      <button type="button" id="btn-continuar-pago" class="btn w-full lg:w-auto lg:self-end" >
+      <button type="button" id="btn-continuar-pago" class="btn w-full lg:w-auto lg:self-end" disabled>
         Continuar al pago
       </button>
       <p class="text-center text-xs text-slate-500">El botón se habilita cuando el formulario es válido</p>

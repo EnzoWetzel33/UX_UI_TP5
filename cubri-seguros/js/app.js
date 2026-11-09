@@ -1,11 +1,18 @@
 // js/app.js
-import { solicitud, irAPaso, actualizarEquipo, planes, elegirPlan } from './estado.js';
+import { solicitud, irAPaso, actualizarEquipo, actualizarTitular, planes, elegirPlan } from './estado.js';
 import { render, mostrarError } from './render.js';
 import {
   validarMarca,
   validarModelo,
   validarValor,
   validarAntiguedad,
+  validarNombre,
+  validarApellido,
+  validarDni,
+  validarNacimiento,
+  validarEmail,
+  validarCelular,
+  validarTerminos,
 } from './validaciones.js';
 
 // Arranque: pinta el estado inicial (paso 0 = inicio)
@@ -112,6 +119,61 @@ btnVerPlanes.addEventListener('click', async () => {
 // Elegir un plan: se guarda en el estado y se vuelve a pintar
 document.querySelectorAll('input[name="plan"]').forEach((radio) => {
   radio.addEventListener('change', () => elegirPlan(radio.value));
+});
+
+// ---------- Paso 3: Datos personales ----------
+
+const btnContinuarPago = document.getElementById('btn-continuar-pago');
+
+// Los id coinciden con los nombres de solicitud.titular
+const camposTitular = [
+  { id: 'nombre', validar: validarNombre },
+  { id: 'apellido', validar: validarApellido },
+  { id: 'dni', validar: validarDni },
+  { id: 'nacimiento', validar: validarNacimiento },
+  { id: 'email', validar: validarEmail },
+  { id: 'celular', validar: validarCelular },
+];
+
+// ¿Está todo bien? (sin mostrar errores, solo para el botón)
+function titularEsValido() {
+  const t = solicitud.titular;
+  return (
+    validarNombre(t.nombre) === null &&
+    validarApellido(t.apellido) === null &&
+    validarDni(t.dni) === null &&
+    validarNacimiento(t.nacimiento) === null &&
+    validarEmail(t.email) === null &&
+    validarCelular(t.celular) === null &&
+    validarTerminos(t.terminos) === null
+  );
+}
+
+function actualizarBotonContinuarPago() {
+  btnContinuarPago.disabled = !titularEsValido();
+}
+
+// Los 6 campos de texto hacen lo mismo: guardar al escribir, validar al salir
+camposTitular.forEach(({ id, validar }) => {
+  const input = document.getElementById(id);
+
+  input.addEventListener('input', () => {
+    actualizarTitular(id, input.value);
+    actualizarBotonContinuarPago();
+  });
+
+  input.addEventListener('blur', () => {
+    mostrarError(id, validar(solicitud.titular[id]));
+  });
+});
+
+// Términos (checkbox)
+const inputTerminos = document.getElementById('terminos');
+
+inputTerminos.addEventListener('change', () => {
+  actualizarTitular('terminos', inputTerminos.checked);
+  mostrarError('terminos', validarTerminos(solicitud.titular.terminos));
+  actualizarBotonContinuarPago();
 });
 
 window.solicitud = solicitud;   // PROVISORIO: solo para mirar el estado en la consola

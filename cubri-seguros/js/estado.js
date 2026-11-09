@@ -27,3 +27,7 @@ export function elegirPlan(id) {
   solicitud.plan = id;
   render();
 }
+
+export function actualizarTitular(campo, valor) {
+  solicitud.titular[campo] = valor;
+}
