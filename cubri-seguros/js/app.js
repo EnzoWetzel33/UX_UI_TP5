@@ -1,5 +1,5 @@
 // js/app.js
-import { solicitud, irAPaso, actualizarEquipo, actualizarTitular, planes, elegirPlan } from './estado.js';
+import { solicitud, irAPaso, actualizarEquipo, actualizarTitular, actualizarPago, planes, elegirPlan } from './estado.js';
 import { render, mostrarError } from './render.js';
 import {
   validarMarca,
@@ -13,6 +13,10 @@ import {
   validarEmail,
   validarCelular,
   validarTerminos,
+  validarTarjeta,
+  validarVencimiento,
+  validarCvv,
+  validarTitular,
 } from './validaciones.js';
 
 // Arranque: pinta el estado inicial (paso 0 = inicio)
@@ -33,7 +37,6 @@ function conectarBoton(id, paso) {
 conectarBoton('btn-empezar', 1);          // Inicio → Cotizar
 conectarBoton('btn-continuar-plan', 3);   // Elegir plan → Datos
 conectarBoton('btn-continuar-pago', 4);   // Datos → Pago
-conectarBoton('btn-pagar', 5);            // Pago → Éxito (provisorio, el pago real es del hito 4)
 conectarBoton('btn-volver-inicio', 0);    // Éxito → Inicio
 conectarBoton('btn-reintentar', 4);       // Error → Pago
 conectarBoton('btn-cambiar-medio', 4);    // Error → Pago
@@ -174,6 +177,52 @@ inputTerminos.addEventListener('change', () => {
   actualizarTitular('terminos', inputTerminos.checked);
   mostrarError('terminos', validarTerminos(solicitud.titular.terminos));
   actualizarBotonContinuarPago();
+});
+
+// ---------- Paso 4: Pago ----------
+
+// "campo" es el nombre dentro de solicitud.pago (el titular de la tarjeta tiene otro id en el HTML)
+const camposPago = [
+  { id: 'tarjeta', campo: 'tarjeta', validar: validarTarjeta },
+  { id: 'vencimiento', campo: 'vencimiento', validar: validarVencimiento },
+  { id: 'cvv', campo: 'cvv', validar: validarCvv },
+  { id: 'titular-tarjeta', campo: 'titular', validar: validarTitular },
+];
+
+// Guardar al escribir, validar al salir del campo
+camposPago.forEach(({ id, campo, validar }) => {
+  const input = document.getElementById(id);
+
+  input.addEventListener('input', () => {
+    actualizarPago(campo, input.value);
+  });
+
+  input.addEventListener('blur', () => {
+    mostrarError(id, validar(solicitud.pago[campo]));
+  });
+});
+
+// Medio de pago (crédito / débito)
+document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
+  radio.addEventListener('change', () => actualizarPago('metodo', radio.value));
+});
+
+// "Pagar y contratar": revalida todo y manda el foco al primer campo con error
+document.getElementById('btn-pagar').addEventListener('click', () => {
+  let primerError = null;
+
+  camposPago.forEach(({ id, campo, validar }) => {
+    const mensaje = validar(solicitud.pago[campo]);
+    mostrarError(id, mensaje);
+    if (mensaje && !primerError) primerError = id;
+  });
+
+  if (primerError) {
+    document.getElementById(primerError).focus();
+    return;
+  }
+
+  irAPaso(5);   // PROVISORIO: en el hito 4 acá va el pago simulado
 });
 
 window.solicitud = solicitud;   // PROVISORIO: solo para mirar el estado en la consola

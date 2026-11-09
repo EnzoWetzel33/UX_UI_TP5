@@ -86,15 +86,25 @@ function renderPlanes() {
   });
 }
 
-// Resumen del footer del paso 2, generado desde el estado
+// Resúmenes generados desde el estado (footer del paso 2 y resumen final del paso 4)
 function renderResumen() {
   const plan = planes.find((p) => p.id === solicitud.plan);
   if (!plan) return;   // todavía no se cargaron los planes
 
   const cuota = formatoMoneda.format(cuotaDe(plan));
+  const equipo = solicitud.equipo;
+  const titular = solicitud.titular;
+
+  // Footer del paso 2
   document.querySelector('[data-resumen="detalle"]').textContent =
-    `Plan ${plan.nombre} · ${solicitud.equipo.modelo}`;
+    `Plan ${plan.nombre} · ${equipo.modelo}`;
   document.querySelector('[data-resumen="total"]').textContent = `${cuota}/mes`;
+
+  // Resumen final del paso 4
+  document.querySelector('[data-final="seguro"]').textContent = `Celular · Plan ${plan.nombre}`;
+  document.querySelector('[data-final="equipo"]').textContent = `${equipo.marca} ${equipo.modelo}`;
+  document.querySelector('[data-final="titular"]').textContent = `${titular.nombre} ${titular.apellido}`;
+  document.querySelector('[data-final="total"]').textContent = cuota;
 }
 
 // Muestra el mensaje de error de un campo (o lo oculta si mensaje es null)

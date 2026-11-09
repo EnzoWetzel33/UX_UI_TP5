@@ -31,3 +31,7 @@ export function elegirPlan(id) {
 export function actualizarTitular(campo, valor) {
   solicitud.titular[campo] = valor;
 }
+
+export function actualizarPago(campo, valor) {
+  solicitud.pago[campo] = valor;
+}

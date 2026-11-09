@@ -359,19 +359,19 @@
         <section class="grid gap-1.5 text-xs">
           <div class="flex justify-between">
             <span class="text-slate-500">Seguro</span>
-            <span class="font-semibold">Celular · Plan Plus</span>
+            <span class="font-semibold" data-final="seguro">Celular · Plan Plus</span>
           </div>
           <div class="flex justify-between">
             <span class="text-slate-500">Equipo</span>
-            <span class="font-semibold">Samsung Galaxy A55</span>
+            <span class="font-semibold" data-final="equipo">Samsung Galaxy A55</span>
           </div>
           <div class="flex justify-between">
             <span class="text-slate-500">Titular</span>
-            <span class="font-semibold">Juan Pérez</span>
+            <span class="font-semibold" data-final="titular">Juan Pérez</span>
           </div>
           <div class="flex justify-between border-t border-slate-200 pt-2 mt-1">
             <span class="text-slate-500">Total mensual</span>
-            <span class="font-bold">$ 3.000</span>
+            <span class="font-bold" data-final="total">$ 3.000</span>
           </div>
         </section>
       </div>
@@ -399,6 +399,7 @@
         <div role="group" class="field">
           <label for="tarjeta">Número de tarjeta</label>
           <input id="tarjeta" name="tarjeta" type="text" inputmode="numeric" placeholder="4111 1111 1111 1111">
+          <p id="tarjeta-error" role="alert" hidden></p>
         </div>
 
         <!-- Vencimiento y CVV -->
@@ -406,10 +407,12 @@
           <div role="group" class="field">
             <label for="vencimiento">Vencimiento</label>
             <input id="vencimiento" name="vencimiento" type="text" inputmode="numeric" placeholder="MM/AA">
+            <p id="vencimiento-error" role="alert" hidden></p>
           </div>
           <div role="group" class="field">
             <label for="cvv">CVV</label>
             <input id="cvv" name="cvv" type="password" inputmode="numeric" placeholder="•••">
+            <p id="cvv-error" role="alert" hidden></p>
           </div>
         </div>
 
@@ -417,6 +420,7 @@
         <div role="group" class="field">
           <label for="titular-tarjeta">Titular de la tarjeta</label>
           <input id="titular-tarjeta" name="titular-tarjeta" type="text" placeholder="Juan Pérez">
+          <p id="titular-tarjeta-error" role="alert" hidden></p>
         </div>
 
       </form>
