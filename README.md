@@ -4,7 +4,7 @@ Trabajo Práctico Nº  5 de **Diseño UXUI 2026** · Licenciatura en Sistemas de
 
 Front-end de un checkout de **Seguro de Celular**: el usuario cotiza, elige un plan, carga sus datos, paga (simulado) y recibe su número de póliza. No hay backend, base de datos ni pagos reales.
 
-- **Sitio publicado:** https://TU-SITIO.netlify.app
+- **Sitio publicado:** [https://TU-SITIO.netlify.app](https://ux-ui-tp5.netlify.app)
 - **Repositorio:** https://github.com/EnzoWetzel33/UX_UI_TP5.git
 - **Diseño en Figma:** https://www.figma.com/design/vJrfOUfiOI7OSeTtRfCloh
 
