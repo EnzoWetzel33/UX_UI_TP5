@@ -21,3 +21,20 @@ body {
 .field [role="alert"] {
   font-size: 12px;
 }
+
+/* Pulido: colores del Figma */
+.alert {
+  background-color: #FFFBEB;
+  border-color: #FDE68A;
+  color: #92400E;
+}
+
+.card.resumen-celeste {
+  background-color: #EEF2FF;
+  border-color: #C7D2FE;
+}
+
+/* Botones un poco más altos, como en el Figma */
+.btn {
+  min-height: 2.75rem;
+}
