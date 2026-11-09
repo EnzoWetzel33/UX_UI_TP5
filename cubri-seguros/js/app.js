@@ -1,5 +1,6 @@
 // js/app.js
-import { solicitud, irAPaso, actualizarEquipo, actualizarTitular, actualizarPago, planes, elegirPlan } from './estado.js';
+import { solicitud, irAPaso, actualizarEquipo, actualizarTitular, actualizarPago, planes, elegirPlan, guardarPoliza, guardarErrorPago, reiniciar } from './estado.js';
+import { simularPago, generarPoliza } from './pago.js';
 import { render, mostrarError } from './render.js';
 import {
   validarMarca,
@@ -37,7 +38,6 @@ function conectarBoton(id, paso) {
 conectarBoton('btn-empezar', 1);          // Inicio → Cotizar
 conectarBoton('btn-continuar-plan', 3);   // Elegir plan → Datos
 conectarBoton('btn-continuar-pago', 4);   // Datos → Pago
-conectarBoton('btn-volver-inicio', 0);    // Éxito → Inicio
 conectarBoton('btn-reintentar', 4);       // Error → Pago
 conectarBoton('btn-cambiar-medio', 4);    // Error → Pago
 
@@ -207,8 +207,11 @@ document.querySelectorAll('input[name="metodo"]').forEach((radio) => {
   radio.addEventListener('change', () => actualizarPago('metodo', radio.value));
 });
 
-// "Pagar y contratar": revalida todo y manda el foco al primer campo con error
-document.getElementById('btn-pagar').addEventListener('click', () => {
+// "Pagar y contratar": revalida, simula el pago y va a éxito o error
+const btnPagar = document.getElementById('btn-pagar');
+
+btnPagar.addEventListener('click', async () => {
+  // 1) Revalidar todo y mandar el foco al primer campo con error
   let primerError = null;
 
   camposPago.forEach(({ id, campo, validar }) => {
@@ -222,7 +225,43 @@ document.getElementById('btn-pagar').addEventListener('click', () => {
     return;
   }
 
-  irAPaso(5);   // PROVISORIO: en el hito 4 acá va el pago simulado
+  // 2) Procesar: botón deshabilitado durante el pago (evita el doble click)
+  btnPagar.disabled = true;
+  btnPagar.textContent = 'Procesando…';
+
+  const resultado = await simularPago(solicitud.pago.tarjeta);
+
+  btnPagar.disabled = false;
+  btnPagar.textContent = 'Pagar y contratar';
+
+  // 3) Resultado
+  if (resultado.ok) {
+    guardarPoliza(generarPoliza());
+    irAPaso(5);   // éxito
+  } else {
+    guardarErrorPago(resultado.motivo);
+    irAPaso(6);   // error de pago (los datos quedan guardados)
+  }
+});
+
+// ---------- Cierre: volver al inicio (reinicia la solicitud) ----------
+
+document.getElementById('btn-volver-inicio').addEventListener('click', () => {
+  reiniciar();   // estado inicial
+
+  // Vacía los formularios y borra los errores que hubieran quedado
+  document.querySelectorAll('form').forEach((form) => form.reset());
+  [
+    'marca', 'modelo', 'valor', 'antiguedad',
+    'nombre', 'apellido', 'dni', 'nacimiento', 'email', 'celular', 'terminos',
+    'tarjeta', 'vencimiento', 'cvv', 'titular-tarjeta',
+  ].forEach((id) => mostrarError(id, null));
+
+  // Los botones vuelven a deshabilitarse
+  actualizarBotonVerPlanes();
+  actualizarBotonContinuarPago();
+
+  irAPaso(0);
 });
 
 window.solicitud = solicitud;   // PROVISORIO: solo para mirar el estado en la consola
