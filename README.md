@@ -87,41 +87,41 @@ Pago simulado (solo tarjetas de prueba, nunca datos reales):
 
 | 01 · Inicio | 02 · Cotizar | 03 · Elegir plan | 04 · Datos |
 |---|---|---|---|
-| ![Inicio mobile](cubri-seguros/capturas/mobile-01-inicio.png) | ![Cotizar mobile](capturas/mobile-02-cotizar.png) | ![Planes mobile](capturas/mobile-03-planes.png) | ![Datos mobile](capturas/mobile-04-datos.png) |
+| ![Inicio mobile](cubri-seguros/capturas/mobile-01-inicio.png) | ![Cotizar mobile](cubri-seguros/capturas/mobile-02-cotizar.png) | ![Planes mobile](cubri-seguros/capturas/mobile-03-planes.png) | ![Datos mobile](cubri-seguros/capturas/mobile-04-datos.png) |
 
 | 05 · Pago | 06 · Éxito | 07 · Error de pago |
 |---|---|---|
-| ![Pago mobile](capturas/mobile-05-pago.png) | ![Éxito mobile](capturas/mobile-06-exito.png) | ![Error mobile](capturas/mobile-07-error.png) |
+| ![Pago mobile](cubri-seguros/capturas/mobile-05-pago.png) | ![Éxito mobile](cubri-seguros/capturas/mobile-06-exito.png) | ![Error mobile](cubri-seguros/capturas/mobile-07-error.png) |
 
 ### Desktop (1440 px)
 
 **01 · Inicio**
 
-![Inicio desktop](capturas/desktop-01-inicio.png)
+![Inicio desktop](cubri-seguros/capturas/desktop-01-inicio.png)
 
 **02 · Cotizar**
 
-![Cotizar desktop](capturas/desktop-02-cotizar.png)
+![Cotizar desktop](cubri-seguros/capturas/desktop-02-cotizar.png)
 
 **03 · Elegir plan**
 
-![Planes desktop](capturas/desktop-03-planes.png)
+![Planes desktop](cubri-seguros/capturas/desktop-03-planes.png)
 
 **04 · Datos personales**
 
-![Datos desktop](capturas/desktop-04-datos.png)
+![Datos desktop](cubri-seguros/capturas/desktop-04-datos.png)
 
 **05 · Pago**
 
-![Pago desktop](capturas/desktop-05-pago.png)
+![Pago desktop](cubri-seguros/capturas/desktop-05-pago.png)
 
 **06 · Éxito**
 
-![Éxito desktop](capturas/desktop-06-exito.png)
+![Éxito desktop](cubri-seguros/capturas/desktop-06-exito.png)
 
 **07 · Error de pago**
 
-![Error desktop](capturas/desktop-07-error.png)
+![Error desktop](cubri-seguros/capturas/desktop-07-error.png)
 
 ## Bonus
 
